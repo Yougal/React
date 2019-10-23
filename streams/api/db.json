@@ -1,0 +1,27 @@
+{
+  "streams": [
+    {
+      "title": "Music",
+      "description": "This is a awesome stream",
+      "userId": "11374754843955461900",
+      "id": 1
+    },
+    {
+      "title": "Video",
+      "description": "This is Video Stream",
+      "userId": "113747542843955461900",
+      "id": 2
+    },
+    {
+      "title": "history",
+      "description": "historical Stream edit",
+      "userId": "113747542843955461900",
+      "id": 3
+    },
+    {
+      "title": "Refactor",
+      "description": "This is test for refactor edit back",
+      "id": 4
+    }
+  ]
+}
