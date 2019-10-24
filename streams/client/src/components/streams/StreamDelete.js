@@ -1,22 +1,39 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import Modal from '../Modal';
 import history from '../../history';
-export default class StreamDelete extends React.Component{
+import {deleteStream, fetchStream} from '../../actions';
+import { connect } from 'react-redux';
+class StreamDelete extends React.Component{
+
+    componentDidMount(){
+        this.props.fetchStream(this.props.match.params.id);
+    }
+
+     actions=
+         (
+            <div>
+                <button className="ui primary button" onClick={()=>this.onDeleteStream()}>Approve</button>
+                <button className="ui button" onClick={()=>history.push("/")}>Cancel</button>
+            </div>
+         )
+
+    onDeleteStream=()=>{
+        this.props.deleteStream(this.props.stream.id);
+    }
+
     render(){
-        return ReactDom.createPortal (
-            <div onClick={()=>history.push('/')} className="ui dimmer modals visible active">
-                <div className="ui standard modal visible active">
-                    <div className="header">Delete Stream</div>
-                    <div className="content">
-                        Are you sure you want to delete this stream?
-                    </div>
-                    <div className="actions">
-                        <div className="ui primary button">Approve</div>
-                        <div className="ui button">Cancel</div>
-                    </div>
-                </div>
-            </div>,
-          document.querySelector("#modal")
+        return (
+            <Modal 
+                title="Delete Stream"
+                content="Are you sure you want to delete this stream?"
+                actions={this.actions}
+            ></Modal>
         );
     }
 }
+
+const mapStateToProps=(state, props)=>{
+    return {stream: state.streams[props.match.params.id]};
+}
+
+export default connect(mapStateToProps,{deleteStream, fetchStream})(StreamDelete);
